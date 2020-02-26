@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Formatting.Compact;
+using System;
 
-namespace Orders.API
+namespace Checkout.Service
 {
     public class Program
     {
@@ -18,7 +12,7 @@ namespace Orders.API
         {
             Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo.File(new RenderedCompactJsonFormatter(), "./logs/Orders.ndjson")
+            .WriteTo.File(new RenderedCompactJsonFormatter(), "./logs/Checkout.ndjson")
             .CreateLogger();
             try
             {

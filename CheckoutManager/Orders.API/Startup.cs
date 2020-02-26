@@ -7,10 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orders.API.Configuration;
+using Orders.API.Database;
 using Orders.API.Extentions;
 using Orders.API.Models;
 using Orders.API.Repository;
-using Orders.API.Repository.Database;
 using Service.Common.Repository;
 using Service.Common.Repository.Database;
 

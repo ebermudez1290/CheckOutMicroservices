@@ -7,17 +7,17 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS build
 WORKDIR /src
-COPY ["Orders.API/Orders.API.csproj", "Orders.API/"]
-RUN dotnet restore "Orders.API/Orders.API.csproj"
+COPY ["Checkout.Service/Checkout.Service.csproj", "Checkout.Service/"]
+RUN dotnet restore "Checkout.Service/Checkout.Service.csproj"
 COPY . .
-WORKDIR "/src/Orders.API"
-RUN dotnet build "Orders.API.csproj" -c Release -o /app
+WORKDIR "/src/Checkout.Service"
+RUN dotnet build "Checkout.Service.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Orders.API.csproj" -c Release -o /app
+RUN dotnet publish "Checkout.Service.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENV ASPNETCORE_URLS=http://+:57325
-ENTRYPOINT ["dotnet", "Orders.API.dll"]
+ENV ASPNETCORE_URLS=http://+:64333
+ENTRYPOINT ["dotnet", "Checkout.Service.dll"]

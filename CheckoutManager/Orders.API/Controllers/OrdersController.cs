@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Orders.API.Models;
-using Orders.API.Repository;
+using Service.Common.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

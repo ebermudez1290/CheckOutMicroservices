@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Checkout.Service.Database;
+using Microsoft.EntityFrameworkCore;
 using Service.Common.Repository.Database;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Orders.API.Repository.Database
+namespace Checkout.Service.Database
 {
     public class EntityFrameworkDatabase<T> : IDatabase<T> where T : class
     {
         private DbSet<T> _objectSet;
-        private OrderDbContext _dbContext;
-        public EntityFrameworkDatabase(OrderDbContext dbContext)
+        private PaymentDbContext _dbContext;
+        public EntityFrameworkDatabase(PaymentDbContext dbContext)
         {
             _dbContext = dbContext;
             _objectSet = _dbContext.Set<T>();
