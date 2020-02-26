@@ -2,6 +2,7 @@
 using Checkout.Service.Extentions;
 using Checkout.Service.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace Checkout.Service
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
-            string connectionString = Configuration.GetConnectionString("OrderDB");
+            string connectionString = Configuration.GetConnectionString("PaymentDB");
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCORSService(settings);
@@ -36,11 +37,10 @@ namespace Checkout.Service
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
+            app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });
+            app.UseCors("CorsPolicy");
+            app.UseMvc();
         }
     }
 }
