@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Orders.API.Models;
+using RawRabbit;
+using Service.Common.Enums;
+using Service.Common.Events;
 using Service.Common.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,12 +16,11 @@ namespace Orders.API.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private ILogger<OrdersController> _logger;
         private IRepository<Order> _orderRepository;
-
-        public OrdersController(ILogger<OrdersController> logger, IRepository<Order> orderRepository)
+        private readonly IBusClient _busClient;
+        public OrdersController(IRepository<Order> orderRepository, IBusClient busClient)
         {
-            _logger = logger;
+            this._busClient = busClient;
             _orderRepository = orderRepository;
         }
 
@@ -32,17 +35,29 @@ namespace Orders.API.Controllers
         public async Task<ActionResult<Order>> Get(string id)
         {
             return Ok(await _orderRepository.GetByIdAsync(id));
-        } 
+        }
         #endregion
 
         [HttpPost]
-        public ActionResult<Order> Post(  Order order)
+        public async Task<ActionResult<Order>> Post(Order order)
         {
-            return Ok(_orderRepository.Create(order));
+            var orderCreated = _orderRepository.Create(order);
+            PostedOrder command = new PostedOrder()
+            {
+                CreateDate = order.CreateDate,
+                Currency = order.Currency,
+                CustomerId = order.CustomerId,
+                LastUpdateDate = DateTime.Now,
+                OrderId = 500,
+                Total = order.Total,
+                Status = ServiceEnums.OrderStatus.Pending.ToString(),
+            };
+            await this._busClient.PublishAsync(command);
+            return Ok(order);
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Order> Put(int id,  Order order)
+        public ActionResult<Order> Put(int id, Order order)
         {
             return Ok(_orderRepository.Update(order));
         }

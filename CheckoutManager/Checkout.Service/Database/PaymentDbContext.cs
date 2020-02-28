@@ -9,6 +9,6 @@ namespace Checkout.Service.Database
         {
         }
 
-        public DbSet<Payment> Item { get; set; }
+        public DbSet<Payment> Payment { get; set; }
     }
 }

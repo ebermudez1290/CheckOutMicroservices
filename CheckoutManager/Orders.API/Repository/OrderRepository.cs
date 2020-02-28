@@ -36,7 +36,7 @@ namespace Orders.API.Repository
 
         public IQueryable<Order> ListAllAsync()
         {
-            return _db.ListAllAsync();
+            return _db.ListAll();
         }
 
     }

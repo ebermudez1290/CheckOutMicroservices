@@ -7,7 +7,6 @@
       "sslPort": 0
     }
   },
-  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -30,7 +29,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Orders",
-      "environmentVariables": {},
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://+:57325"
+      },
       "httpPort": 57325
     }
   }

@@ -19,5 +19,4 @@ RUN dotnet publish "Checkout.Service.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENV ASPNETCORE_URLS=http://+:64333
 ENTRYPOINT ["dotnet", "Checkout.Service.dll"]

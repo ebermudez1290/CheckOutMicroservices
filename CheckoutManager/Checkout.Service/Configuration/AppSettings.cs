@@ -1,4 +1,4 @@
-﻿namespace Checkout.Service
+﻿namespace Checkout.Service.Configuration
 {
     public class AppSettings
     {

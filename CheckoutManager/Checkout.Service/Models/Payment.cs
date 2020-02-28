@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Service.Common.Events;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using static Service.Common.Enums.ServiceEnums;
 
 namespace Checkout.Service.Models
 {
@@ -10,5 +13,16 @@ namespace Checkout.Service.Models
         public Decimal TenderAmount { get; set; }
         public Decimal Change { get; set; }
         public Decimal Amount { get; set; }
+
+        public Payment() { }
+
+        public Payment(PostedOrder postedOrder)
+        {
+            OrderId = postedOrder.OrderId;
+            Type = "Credit Card";
+            TenderAmount = postedOrder.Total;
+            Change = 0;
+            Amount = postedOrder.Total;
+        }
     }
 }

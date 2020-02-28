@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package auditservice;
+
+message AuditEntry{
+	string Id = 1;
+	int64 OrderId = 2;
+	int64 PaymentId = 3;
+}
+
+message CreateAuditRequest { AuditEntry audit = 1; }
+
+message CreateAuditResponse { AuditEntry auditResponse = 1; }
+
+message ReadAuditRequest { AuditEntry audit = 1; }
+
+message ReadAuditResponse { AuditEntry auditResponse = 1; }
+
+message ReadAllAuditRequest { AuditEntry audit = 1; }
+
+message ReadAllAuditResponse { AuditEntry auditResponse = 1; }
+
+message UpdateAuditRequest { AuditEntry audit = 1; }
+
+message UpdateAuditResponse { AuditEntry auditResponse = 1; }
+
+message DeleteAuditRequest { AuditEntry audit = 1; }
+
+message DeleteAuditResponse { AuditEntry auditResponse = 1; }
+	
+
+service AuditService {
+	rpc Create (CreateAuditRequest) returns (CreateAuditResponse) {}
+	rpc Read (ReadAuditRequest) returns (ReadAuditResponse) {}
+	rpc ReadAll (ReadAllAuditRequest) returns (stream ReadAllAuditResponse) {}
+	rpc Update (UpdateAuditRequest) returns (UpdateAuditResponse) {}
+	rpc Delete (DeleteAuditRequest) returns (DeleteAuditResponse) {}
+}
+

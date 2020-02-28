@@ -53,7 +53,7 @@ namespace Checkout.Service.Database
             _dbContext.SaveChanges();
         }
 
-        public IQueryable<T> ListAllAsync()
+        public IQueryable<T> ListAll()
         {
             return _objectSet;
         }

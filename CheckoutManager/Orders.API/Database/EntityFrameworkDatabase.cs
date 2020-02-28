@@ -52,7 +52,7 @@ namespace Orders.API.Database
             _dbContext.SaveChanges();
         }
 
-        public IQueryable<T> ListAllAsync()
+        public IQueryable<T> ListAll()
         {
             return _objectSet;
         }

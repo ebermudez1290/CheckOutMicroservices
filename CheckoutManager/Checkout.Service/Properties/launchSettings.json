@@ -27,7 +27,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Payments",
-      "environmentVariables": {},
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://+:64333"
+      },
       "httpPort": 64333
     }
   }

@@ -12,6 +12,6 @@ namespace Service.Common.Repository.Database
         Task<T> GetByCriteriaAsync(Expression<Func<T, bool>> predicate);
         T Update(T entity, string id);
         void Delete(T Entity);
-        IQueryable<T> ListAllAsync();
+        IQueryable<T> ListAll();
     }
 }

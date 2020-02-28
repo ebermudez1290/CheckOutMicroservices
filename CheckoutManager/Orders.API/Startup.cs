@@ -8,9 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orders.API.Configuration;
 using Orders.API.Database;
-using Orders.API.Extentions;
 using Orders.API.Models;
 using Orders.API.Repository;
+using Service.Common.Cors;
+using Service.Common.HC;
+using Service.Common.Jwt;
+using Service.Common.RabbitMq.Extensions;
 using Service.Common.Repository;
 using Service.Common.Repository.Database;
 
@@ -18,27 +21,24 @@ namespace Orders.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public Startup(IConfiguration configuration) { Configuration = configuration; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
             string connectionString = Configuration.GetConnectionString("OrderDB");
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddCORSService(settings);
+            services.AddCORSService(settings.AllowedAuthOrigins);
             services.AddDbContext<OrderDbContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IDatabase<Order>, EntityFrameworkDatabase<Order>>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
-            services.AddJWTAuthentication(settings);
+            services.AddJWTAuthentication(settings.Secret);
+            services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
             services.AddDBHealthCheck(connectionString);
         }
 
@@ -50,5 +50,6 @@ namespace Orders.API
             app.UseCors("CorsPolicy");
             app.UseMvc();
         }
+
     }
 }
