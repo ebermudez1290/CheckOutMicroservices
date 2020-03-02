@@ -30,6 +30,7 @@ public class SqlConnectionHealthCheck : IHealthCheck
                 if (TestQuery != null)
                 {
                     var command = connection.CreateCommand();
+                    command.CommandTimeout = 10;
                     command.CommandText = TestQuery;
                     await command.ExecuteNonQueryAsync(cancellationToken);
                 }

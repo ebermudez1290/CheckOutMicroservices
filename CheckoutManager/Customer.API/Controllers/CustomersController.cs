@@ -38,7 +38,7 @@ namespace Customer.API
         [HttpPost]
         public ActionResult<DBModels.Customer> Post(DBModels.Customer customer)
         {
-            return Ok(_customerRepository.Create(customer));
+            return Ok();
         }
 
         [HttpPut("{id}")]

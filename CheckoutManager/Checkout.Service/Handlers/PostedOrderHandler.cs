@@ -31,13 +31,13 @@ namespace Checkout.Service.Handlers
             try
             {
                 _logger.LogError($"We received the following order : {@event.OrderId}");
-                Thread.Sleep(30000);
+                Thread.Sleep(10000);
                 var result = await _gateway.ProcessPaymentAsync(false);
                 var payment = new Payment(@event);
                 payment=_paymentRepository.Create(payment);
                 if (result)
                     await _busClient.PublishAsync(new PaymentAccepted() {
-                        Amount = payment.Amount,
+                        Amount = (double)payment.Amount,
                         OrderId = payment.OrderId,
                         PaymentId = payment.Id,
                         Type = PaymentType.CreditCard
@@ -46,7 +46,8 @@ namespace Checkout.Service.Handlers
                     await _busClient.PublishAsync(new PaymentRejected() {
                         OrderId = payment.OrderId,
                         Code = "401",
-                        Reason = "The payment cannot be processed right now"
+                        Reason = "The payment cannot be processed right now",
+                        Amount = (double)@event.Total,
                     });
         }
             catch (ArgumentNullException exception)
@@ -55,7 +56,8 @@ namespace Checkout.Service.Handlers
                 await _busClient.PublishAsync(new PaymentRejected() {
                     OrderId = @event.OrderId,
                     Code = "400",
-                    Reason = exception.Message
+                    Amount = (double)@event.Total,
+                    Reason = exception.Message,
                 });
             }
         }

@@ -20,6 +20,11 @@ namespace Checkout.Service.Repository
             return _db.Create(order);
         }
 
+        public async Task<Payment> CreateAsync(Payment order)
+        {
+            return await _db.CreateAsync(order);
+        }
+
         public async Task<Payment> GetByIdAsync(string id)
         {
             return await _db.GetByCriteriaAsync(x=>x.Id == long.Parse(id));

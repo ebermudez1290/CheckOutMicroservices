@@ -19,6 +19,11 @@ namespace Customer.API.Repository
             return _db.Create(customer);
         }
 
+        public async Task<DbModels.Customer> CreateAsync(DbModels.Customer customer)
+        {
+            return await _db.CreateAsync(customer);
+        }
+
         public async Task<DbModels.Customer> GetByIdAsync(string id)
         {
             return await _db.GetByCriteriaAsync(x=>x.Id == long.Parse(id));

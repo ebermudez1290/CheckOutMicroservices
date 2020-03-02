@@ -77,4 +77,5 @@ namespace Service.Common.Services
 
         public override ServiceHost Build() => new ServiceHost(_webHost);
     }
+
 }

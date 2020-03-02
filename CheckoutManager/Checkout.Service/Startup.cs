@@ -32,18 +32,15 @@ namespace Checkout.Service
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
             string connectionString = Configuration.GetConnectionString("PaymentDB");
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddCORSService(settings.AllowedAuthOrigins);
-            services.AddDbContext<PaymentDbContext>(options => options.UseSqlServer(connectionString),ServiceLifetime.Singleton);
+            services.AddDbContext<PaymentDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+            services.AddTransient<DbContext, PaymentDbContext>();
             services.AddTransient<IDatabase<Payment>, EntityFrameworkDatabase<Payment>>();
             services.AddTransient<IRepository<Payment>, PaymentRepository>();
             services.AddTransient<IEventHandler<PostedOrder>, PostedOrderHandler>();
             services.AddTransient<IPaymentGateway, PaymentGateway.PaymentGateway> ();
-
             services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
-            services.AddDBHealthCheck(connectionString);
+            services.AddDBHealthCheck(new SqlConnectionHealthCheck( connectionString));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -51,7 +48,6 @@ namespace Checkout.Service
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
             app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });
             app.UseCors("CorsPolicy");
-            app.UseMvc();
         }
     }
 }

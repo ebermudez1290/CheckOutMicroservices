@@ -29,9 +29,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Orders",
-      "environmentVariables": {
-        "ASPNETCORE_URLS": "http://+:57325"
-      },
+      "environmentVariables": {},
       "httpPort": 57325
     }
   }

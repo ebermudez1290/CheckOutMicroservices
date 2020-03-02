@@ -4,7 +4,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-nanoserver-1809 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS build
 WORKDIR /src
@@ -20,4 +19,5 @@ RUN dotnet publish "Customer.API.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+ENV ASPNETCORE_URLS=http://+:60045
 ENTRYPOINT ["dotnet", "Customer.API.dll"]

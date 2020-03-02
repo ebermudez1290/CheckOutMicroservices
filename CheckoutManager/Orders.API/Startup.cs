@@ -35,11 +35,12 @@ namespace Orders.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCORSService(settings.AllowedAuthOrigins);
             services.AddDbContext<OrderDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<DbContext,OrderDbContext>();
             services.AddScoped<IDatabase<Order>, EntityFrameworkDatabase<Order>>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddJWTAuthentication(settings.Secret);
             services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
-            services.AddDBHealthCheck(connectionString);
+            services.AddDBHealthCheck(new SqlConnectionHealthCheck(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

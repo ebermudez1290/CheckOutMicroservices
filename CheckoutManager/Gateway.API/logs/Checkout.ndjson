@@ -1,0 +1,16 @@
+{"@t":"2020-03-01T00:37:54.9399249Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-01T00:41:31.6768860Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-01T00:44:21.2225636Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-01T00:45:00.1503471Z","@m":"Declaring exchange \"service.common.commands.customerservice\".","@i":"1f4affda","exchangeName":"service.common.commands.customerservice","SourceContext":"RawRabbit.Common.TopologyProvider"}
+{"@t":"2020-03-01T00:45:00.2344369Z","@m":"Setting 'Publish Acknowledge' for channel '2'","@i":"202bea88","channelNumber":2,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:45:00.2481121Z","@m":"Setting up publish acknowledgement for 1 with timeout 0:00:01","@i":"25a85374","publishSequence":1,"timeout":"00:00:01","SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:45:01.9884804Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:45:01.9926965Z","@m":"Performing basic publish with routing key \"createcustomer\" on exchange \"service.common.commands.customerservice\".","@i":"475a66e6","routingKey":"createcustomer","exchangeName":"service.common.commands.customerservice","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
+{"@t":"2020-03-01T00:45:02.0089789Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:55:41.3139551Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-01T00:56:41.4150015Z","@m":"Declaring exchange \"service.common.commands.customerservice\".","@i":"1f4affda","exchangeName":"service.common.commands.customerservice","SourceContext":"RawRabbit.Common.TopologyProvider"}
+{"@t":"2020-03-01T00:56:41.4952389Z","@m":"Setting 'Publish Acknowledge' for channel '2'","@i":"202bea88","channelNumber":2,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:56:41.5112867Z","@m":"Setting up publish acknowledgement for 1 with timeout 0:00:01","@i":"25a85374","publishSequence":1,"timeout":"00:00:01","SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:56:41.5144954Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-01T00:56:41.5199087Z","@m":"Performing basic publish with routing key \"createcustomer\" on exchange \"service.common.commands.customerservice\".","@i":"475a66e6","routingKey":"createcustomer","exchangeName":"service.common.commands.customerservice","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
+{"@t":"2020-03-01T00:56:41.5398562Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}

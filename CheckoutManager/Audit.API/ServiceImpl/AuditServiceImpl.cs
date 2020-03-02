@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Audit.API.Database;
 using Audit.API.Repository;
@@ -33,18 +34,25 @@ namespace Audit.API.ServiceImpl
         {
             IDatabase<AuditEntry> database = new MongoDatabase<AuditEntry>();
             IRepository<AuditEntry> repository = new AuditRepository(database);
-            var result = await repository.GetByIdAsync(request.Audit.Id);
+            var result = await repository.GetByIdAsync(Encoding.UTF8.GetString(request.Audit.Id.ToByteArray()));
             return await Task.FromResult(new ReadAuditResponse() { AuditResponse = result });
         }
 
         public async override Task ReadAll(ReadAllAuditRequest request, IServerStreamWriter<ReadAllAuditResponse> responseStream, ServerCallContext context)
         {
-            IDatabase<AuditEntry> database = new MongoDatabase<AuditEntry>();
-            IRepository<AuditEntry> repository = new AuditRepository(database);
-            var result = repository.ListAllAsync().ToList();
-            foreach (var auditEntry in result)
+            try
             {
-                await responseStream.WriteAsync(new ReadAllAuditResponse() { AuditResponse = auditEntry });
+                IDatabase<AuditEntry> database = new MongoDatabase<AuditEntry>();
+                IRepository<AuditEntry> repository = new AuditRepository(database);
+                var result = repository.ListAllAsync().ToList();
+                foreach (var auditEntry in result)
+                {
+                    await responseStream.WriteAsync(new ReadAllAuditResponse() { AuditResponse = auditEntry });
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw;
             }
         }
 

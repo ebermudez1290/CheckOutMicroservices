@@ -9,7 +9,7 @@ namespace Service.Common.Events
     {
         public long PaymentId { get; set; }
         public long OrderId { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public PaymentType Type { get; set; }
     }
 }

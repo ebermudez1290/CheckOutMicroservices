@@ -27,9 +27,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/values",
-      "environmentVariables": {
-        "ASPNETCORE_URLS": "http://+:60045"
-      },
+      "environmentVariables": {},
       "httpPort": 60045
     }
   }

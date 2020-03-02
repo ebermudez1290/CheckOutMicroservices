@@ -3,9 +3,13 @@ syntax = "proto3";
 package auditservice;
 
 message AuditEntry{
-	string Id = 1;
+	bytes Id = 1;
 	int64 OrderId = 2;
 	int64 PaymentId = 3;
+	double Amount = 4;
+	string Status = 5;
+	int32 code = 6 ;
+	string Description = 7;
 }
 
 message CreateAuditRequest { AuditEntry audit = 1; }

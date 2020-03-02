@@ -34,7 +34,6 @@ namespace Service.Common.RabbitMq.Extensions
 
         public static void AddRabbitMq(this IServiceCollection services,IConfigurationSection configuration)
         {
-            
             var config = configuration.Get<RawRabbitConfiguration>();
             RawRabbitOptions options = new RawRabbitOptions() { ClientConfiguration = config };
             var client = RawRabbitFactory.CreateSingleton(options);

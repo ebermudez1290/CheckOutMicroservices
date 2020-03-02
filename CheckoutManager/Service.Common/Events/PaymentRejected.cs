@@ -9,5 +9,6 @@ namespace Service.Common.Events
         public long OrderId { get; set; }
         public string Reason { get; set; }
         public string Code { get; set; }
+        public double Amount { get; set; }
     }
 }

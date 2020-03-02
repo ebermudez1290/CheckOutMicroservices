@@ -7,6 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Service.Common.Commands.CustomerService;
+using Service.Common.Serilog;
+using Service.Common.Services;
 
 namespace Customer.API
 {
@@ -14,11 +17,11 @@ namespace Customer.API
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            LoggerUtil.InitApp(ServiceHost.Create<Startup>(args)
+                .UseRabbitMq().SubscribeToCommand<CreateCustomer>()
+                .Build().Run);
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
     }
 }

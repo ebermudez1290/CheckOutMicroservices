@@ -39,15 +39,14 @@ namespace Audit.API
             string connectionString = Configuration.GetConnectionString("AuditDB");
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddCORSService(settings.AllowedAuthOrigins);
             services.AddTransient<IDatabase<AuditEntry>, MongoDatabase<AuditEntry>>();
             services.AddTransient<IRepository<AuditEntry>, AuditRepository>();
             services.AddTransient<IEventHandler<PaymentAccepted>, PaymentAcceptedHandler>();
             services.AddTransient<IEventHandler<PaymentRejected>, PaymentRejectedHandler>();
-
             services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
-            services.AddDBHealthCheck(connectionString);
+
+            services.AddDBHealthCheck(new MongoDbHealthCheck(connectionString));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

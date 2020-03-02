@@ -27,17 +27,44 @@ namespace Audit.API.Database
             return entity;// document.GetValue("_id").ToString();
         }
 
-        public async Task<T> GetByCriteriaAsync(Expression<Func<T,bool>> predicate)
+        public async Task<T> CreateAsync(T entity)
+        {
+            var document = entity.ToBsonDocument();
+            document.Remove("_id");
+            await collection.InsertOneAsync(document);
+            return entity;// document.GetValue("_id").ToString();
+        }
+
+        public T GetByCriteria(Expression<Func<T, bool>> predicate)
         {
             try
             {
-                //PropertyInfo prop = typeof(T).GetProperty("Id");
-                string id = "123";// prop.GetValue(entity).ToString();
-                var filter = new FilterDefinitionBuilder<BsonDocument>().Eq("_id", new ObjectId(id));
-                var result = await collection.FindAsync<T>(filter);
+                var collection = db.GetCollection<T>(typeof(T).ToString()).AsQueryable();
+                var result = collection.Where(predicate);
                 if (result == null)
-                    throw new RpcException(new Status(StatusCode.NotFound, $"The item with id: {id} was not found"));
+                    throw new RpcException(new Status(StatusCode.NotFound, $"The item was not found"));
                 return result.FirstOrDefault();
+            }
+            catch (System.Exception exception)
+            {
+                System.Console.WriteLine(exception);
+                throw;
+            }
+        }
+
+        public async Task<T> GetByCriteriaAsync(Expression<Func<T, bool>> predicate)
+        {
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    var collection = db.GetCollection<T>(typeof(T).ToString()).AsQueryable();
+                    var result = collection.Where(predicate);
+                    if (result == null)
+                        throw new RpcException(new Status(StatusCode.NotFound, $"The item was not found"));
+                    return result.FirstOrDefault();
+                }
+                );
             }
             catch (System.Exception exception)
             {
@@ -48,10 +75,10 @@ namespace Audit.API.Database
 
         public T Update(T entity, string id)
         {
-            var filter = new FilterDefinitionBuilder<BsonDocument>().Eq("_id", new ObjectId(id)) ;
+            var filter = new FilterDefinitionBuilder<BsonDocument>().Eq("_id", new ObjectId(id));
             var document = entity.ToBsonDocument();
             document.Remove("_id");
-            collection.ReplaceOne(filter,document);
+            collection.ReplaceOne(filter, document);
             return entity;
         }
 
@@ -67,9 +94,7 @@ namespace Audit.API.Database
 
         public IQueryable<T> ListAll()
         {
-            var filter = new FilterDefinitionBuilder<BsonDocument>().Empty;
-            var result = collection.Find(filter).ToList();
-            return BsonSerializer.Deserialize<IEnumerable<T>>(result.SingleOrDefault()).AsQueryable();
+            return db.GetCollection<T>(typeof(T).ToString()).AsQueryable();
         }
     }
 }

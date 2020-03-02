@@ -19,5 +19,11 @@ namespace Service.Common.Enums
             CreditCard,
             Credit
         }
+
+        public enum PaymentStatus
+        {
+            Accepted,
+            Rejected
+        }
     }
 }
