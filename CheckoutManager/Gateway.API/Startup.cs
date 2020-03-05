@@ -5,34 +5,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using Service.Common.Cors;
 using Service.Common.Jwt;
+using Service.Common.Ocelot;
 using Service.Common.RabbitMq.Extensions;
+using System;
 
 namespace Gateway.API
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IConfigurationRoot ConfigurationRoot { get; }
 
-        public Startup(IConfiguration configuration) { Configuration = configuration; }
+        public Startup(IConfiguration configuration, IHostingEnvironment env) {
+            Configuration = configuration;
+            var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            ConfigurationRoot = builder.Build();
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCORSService(settings.AllowedAuthOrigins);
-            services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
-            services.AddJWTAuthentication(settings.Secret);
+            services.AddOcelotWithEureka(ConfigurationRoot);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
             app.UseCors("CorsPolicy");
-            app.UseMvc();
+            await app.UseOcelot();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Customer.API.Configuration;
 using Customer.API.Database;
-using Customer.API.EventHandlers;
 using Customer.API.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -10,14 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Service.Common.Commands;
-using Service.Common.Commands.CustomerService;
 using Service.Common.Cors;
 using Service.Common.HC;
 using Service.Common.Jwt;
-using Service.Common.RabbitMq.Extensions;
 using Service.Common.Repository;
 using Service.Common.Repository.Database;
+using Service.Common.ServiceDiscovery;
+using Steeltoe.Discovery.Client;
 using DbModels = Customer.API.Models;
 
 namespace Customer.API
@@ -37,14 +35,13 @@ namespace Customer.API
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCORSService(settings.AllowedAuthOrigins);
-            services.AddDbContext<CustomerDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
-            services.AddTransient<DbContext, CustomerDbContext>();
-            services.AddTransient<IDatabase<DbModels.Customer>, EntityFrameworkDatabase<DbModels.Customer>>();
-            services.AddTransient<IRepository<DbModels.Customer>, CustomerRepository>();
-            services.AddTransient<ICommandHandler<CreateCustomer>, CreateCustomerHandler>();
+            services.AddDbContext<CustomerDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<DbContext, CustomerDbContext>();
+            services.AddScoped<IDatabase<DbModels.Customer>, EntityFrameworkDatabase<DbModels.Customer>>();
+            services.AddScoped<IRepository<DbModels.Customer>, CustomerRepository>();
             services.AddJWTAuthentication(settings.Secret);
-            services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
             services.AddDBHealthCheck(new SqlConnectionHealthCheck(connectionString));
+            services.AddServiceDiscovery(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -52,6 +49,7 @@ namespace Customer.API
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
             app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });
             app.UseCors("CorsPolicy");
+            app.UseDiscoveryClient();
             app.UseMvc();
         }
     }

@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".proto", ".proto", "{D77AF8
 		audit.proto = audit.proto
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.CLI", "Audit.CLI\Audit.CLI.csproj", "{76FB2080-2CFE-42BE-A20F-FCF94F9FE2E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audit.CLI", "Audit.CLI\Audit.CLI.csproj", "{76FB2080-2CFE-42BE-A20F-FCF94F9FE2E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "Gateway.API\Gateway.API.csproj", "{060F57EF-56A8-4F89-9CA9-67E24BFAFAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.API", "Gateway.API\Gateway.API.csproj", "{060F57EF-56A8-4F89-9CA9-67E24BFAFAAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

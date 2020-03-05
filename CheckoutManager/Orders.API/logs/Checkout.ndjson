@@ -100,3 +100,11 @@
 {"@t":"2020-02-29T16:26:54.8734151Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
 {"@t":"2020-02-29T16:26:54.8783390Z","@m":"Performing basic publish with routing key \"postedorder\" on exchange \"service.common.events\".","@i":"475a66e6","routingKey":"postedorder","exchangeName":"service.common.events","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
 {"@t":"2020-02-29T16:26:54.8963125Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:43:05.3860244Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-03T15:52:15.3907436Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-03T15:57:05.1692372Z","@m":"Declaring exchange \"service.common.events\".","@i":"1f4affda","exchangeName":"service.common.events","SourceContext":"RawRabbit.Common.TopologyProvider"}
+{"@t":"2020-03-03T15:57:05.2800241Z","@m":"Setting 'Publish Acknowledge' for channel '2'","@i":"202bea88","channelNumber":2,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:05.2991856Z","@m":"Setting up publish acknowledgement for 1 with timeout 0:00:01","@i":"25a85374","publishSequence":1,"timeout":"00:00:01","SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:05.3036407Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:05.3104758Z","@m":"Performing basic publish with routing key \"postedorder\" on exchange \"service.common.events\".","@i":"475a66e6","routingKey":"postedorder","exchangeName":"service.common.events","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
+{"@t":"2020-03-03T15:57:05.3367493Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}

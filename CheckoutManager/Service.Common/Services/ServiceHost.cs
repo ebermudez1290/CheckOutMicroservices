@@ -24,7 +24,10 @@ namespace Service.Common.Services
         {
             Console.Title = typeof(TStartup).Namespace;
             var config = new ConfigurationBuilder().AddEnvironmentVariables().AddCommandLine(args).Build();
-            var webHostBuilder = WebHost.CreateDefaultBuilder().UseConfiguration(config).UseStartup<TStartup>();
+
+            var webHostBuilder = WebHost.CreateDefaultBuilder()
+                .UseConfiguration(config)
+                .UseStartup<TStartup>();
             return new HostBuilder(webHostBuilder.Build());
         }
     }

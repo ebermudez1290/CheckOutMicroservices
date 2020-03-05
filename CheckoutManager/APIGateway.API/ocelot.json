@@ -1,0 +1,21 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/Api/Customers/",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "Get" ],
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 60045
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Customers/"
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "BaseUrl": "http://localhost:50434"
+  }
+}

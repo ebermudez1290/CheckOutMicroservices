@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:57325",
+      "applicationUrl": "http://localhost:50434",
       "sslPort": 0
     }
   },
@@ -11,26 +11,24 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/Orders",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Orders.API": {
+    "APIGateway.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Orders",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:57325"
+      "applicationUrl": "http://localhost:50434"
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Orders",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {},
-      "httpPort": 57325
+      "httpPort": 50434
     }
   }
 }

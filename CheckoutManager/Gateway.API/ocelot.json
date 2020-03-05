@@ -1,0 +1,30 @@
+{
+  "ReRoutes": [
+    {
+
+      "DownstreamPathTemplate": "/api/customers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Customers",
+      "ServiceName": "CustomerApi",
+      "UpstreamHttpMethod": [ "Get" ],
+      "FileCacheOptions": { "TtlSeconds": 15 }
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiSecurity",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "userType": "SALESMAN"
+      //}
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "UseServiceDiscovery": true,
+    "ServiceDiscoveryProvider": {
+      "Type": "Eureka",
+      "Host": "172.23.10.209",
+      "Port": "8761"
+    }
+  }
+}

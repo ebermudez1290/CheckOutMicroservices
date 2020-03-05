@@ -11,6 +11,7 @@ namespace Service.Common.Repository.Database
         Task<T> CreateAsync(T entity);
 
         Task<T> GetByCriteriaAsync(Expression<Func<T, bool>> predicate);
+
         T GetByCriteria(Expression<Func<T, bool>> predicate);
 
         T Update(T entity, string id);

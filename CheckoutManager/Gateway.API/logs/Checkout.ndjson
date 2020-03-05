@@ -14,3 +14,27 @@
 {"@t":"2020-03-01T00:56:41.5144954Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
 {"@t":"2020-03-01T00:56:41.5199087Z","@m":"Performing basic publish with routing key \"createcustomer\" on exchange \"service.common.commands.customerservice\".","@i":"475a66e6","routingKey":"createcustomer","exchangeName":"service.common.commands.customerservice","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
 {"@t":"2020-03-01T00:56:41.5398562Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-04T17:03:04.8563282Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:05:14.9776090Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:12:33.3133524Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:23:05.3761123Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:30:34.3874126Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:48:03.4288353Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:50:57.2458438Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T17:56:36.8893456Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:00:14.8575250Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:02:35.1408503Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:38:24.8760882Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:47:26.2291210Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:49:58.1886544Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T18:59:47.5455734Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T19:03:57.1662022Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T19:05:47.0317531Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T19:12:53.5020703Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T19:19:04.7933045Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-04T19:28:48.8565779Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T15:18:05.9042690Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T17:53:29.5798830Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T19:58:21.3122812Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T20:48:42.7424225Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T20:53:26.2804359Z","@m":"Starting up","@i":"a6ca7b02"}

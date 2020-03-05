@@ -32,7 +32,7 @@ namespace Checkout.Service.Handlers
             {
                 _logger.LogError($"We received the following order : {@event.OrderId}");
                 Thread.Sleep(10000);
-                var result = await _gateway.ProcessPaymentAsync(false);
+                var result = await _gateway.ProcessPaymentAsync(true);
                 var payment = new Payment(@event);
                 payment=_paymentRepository.Create(payment);
                 if (result)

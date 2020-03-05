@@ -64,3 +64,9 @@
 {"@t":"2020-02-29T16:27:05.9150931Z","@m":"Performing basic publish with routing key \"paymentaccepted\" on exchange \"service.common.events\".","@i":"475a66e6","routingKey":"paymentaccepted","exchangeName":"service.common.events","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
 {"@t":"2020-02-29T16:27:05.9297238Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
 {"@t":"2020-02-29T22:55:32.3062127Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-03T15:51:46.0843340Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-03T15:57:15.7206013Z","@m":"Setting 'Publish Acknowledge' for channel '3'","@i":"202bea88","channelNumber":3,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:15.7396610Z","@m":"Setting up publish acknowledgement for 1 with timeout 0:00:01","@i":"25a85374","publishSequence":1,"timeout":"00:00:01","SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:15.7436108Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-03T15:57:15.7482002Z","@m":"Performing basic publish with routing key \"paymentaccepted\" on exchange \"service.common.events\".","@i":"475a66e6","routingKey":"paymentaccepted","exchangeName":"service.common.events","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
+{"@t":"2020-03-03T15:57:15.7615620Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
