@@ -5,12 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Orders.API.Configuration;
 using Orders.API.Database;
 using Orders.API.Models;
 using Orders.API.Repository;
 using Service.Common.Cors;
+using Service.Common.Events;
+using Service.Common.EventSourcing;
 using Service.Common.HC;
 using Service.Common.Jwt;
 using Service.Common.RabbitMq.Extensions;
@@ -31,25 +34,33 @@ namespace Orders.API
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
             string connectionString = Configuration.GetConnectionString("OrderDB");
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddControllers().AddNewtonsoftJson(opt => { opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
+            //Cors
             services.AddCORSService(settings.AllowedAuthOrigins);
+            //Database access
             services.AddDbContext<OrderDbContext>(options => options.UseSqlServer(connectionString));
-            services.AddTransient<DbContext,OrderDbContext>();
+            services.AddTransient<DbContext, OrderDbContext>();
             services.AddScoped<IDatabase<Order>, EntityFrameworkDatabase<Order>>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
+            //Marten add
+            services.AddMartenEventSourcing(Configuration.GetConnectionString("EventSource"));
+            services.AddScoped<IEventSourcingDb<PostedOrder>, MartenEventSource<PostedOrder>>();
+            //JWT
             services.AddJWTAuthentication(settings.Secret);
+            //RabbitMQ
             services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
+            //HC
             services.AddDBHealthCheck(new SqlConnectionHealthCheck(connectionString));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
+            app.UseRouting();
             app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });
             app.UseCors("CorsPolicy");
-            app.UseMvc();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
     }

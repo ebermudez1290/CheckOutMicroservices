@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Audit.API.Database;
@@ -50,7 +51,7 @@ namespace Audit.API.ServiceImpl
                     await responseStream.WriteAsync(new ReadAllAuditResponse() { AuditResponse = auditEntry });
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
                 throw;
             }

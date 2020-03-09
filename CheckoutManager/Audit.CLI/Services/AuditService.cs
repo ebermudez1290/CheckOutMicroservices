@@ -21,7 +21,7 @@ namespace Audit.CLI.Services
                     entries.Add(result.ResponseStream.Current.AuditResponse);
                 System.Console.WriteLine($"Here is the audit list: {string.Join(",", entries)} {Environment.NewLine}");
             }
-            catch (RpcException exception)
+            catch (RpcException)
             {
 
                 throw;

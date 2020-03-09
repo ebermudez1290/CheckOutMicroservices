@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Customer.API.Command;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using RawRabbit;
 using Service.Common.Enums;
 using Service.Common.Events;
@@ -16,8 +18,10 @@ namespace Customer.API
     public class CustomersController : ControllerBase
     {
         private IRepository<DBModels.Customer> _customerRepository;
-        public CustomersController(IRepository<DBModels.Customer> orderRepository)
+        private readonly IMediator _bus;
+        public CustomersController(IRepository<DBModels.Customer> orderRepository,IMediator bus)
         {
+            this._bus = bus;
             _customerRepository = orderRepository;
         }
 
@@ -36,9 +40,10 @@ namespace Customer.API
         #endregion
 
         [HttpPost]
-        public ActionResult<DBModels.Customer> Post(DBModels.Customer customer)
+        public async Task<ActionResult<DBModels.Customer>> Post(CreateCustomerCommand customerCommand)
         {
-            return Ok();
+            var result = await _bus.Send(customerCommand);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]

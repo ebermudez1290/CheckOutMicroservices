@@ -6,7 +6,7 @@ namespace Customer.API.Models
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; } 
-        public string DocumentType { get; set; }
-        public string DocumentNumber { get; set; }
+        public string Type { get; set; }
+        public string Number { get; set; }
     }
 }

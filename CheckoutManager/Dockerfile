@@ -1,42 +1,24 @@
 #Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
 #For more information, please see https://aka.ms/containercompat
 
-#FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-nanoserver-1809 AS base
-#WORKDIR /app
-#EXPOSE 80
-#
-#FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS build
-#WORKDIR /src
-#COPY ["Customer.API/Customer.API.csproj", "Customer.API/"]
-#RUN dotnet restore "Customer.API/Customer.API.csproj"
-#COPY . .
-#WORKDIR "/src/Customer.API"
-#RUN dotnet build "Customer.API.csproj" -c Release -o /app
-#
-#FROM build AS publish
-#RUN dotnet publish "Customer.API.csproj" -c Release -o /app
-#
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app .
-#ENV ASPNETCORE_URLS=http://+:60045
-#ENTRYPOINT ["dotnet", "Customer.API.dll"]
-
-
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-nanoserver-1809 AS base
 WORKDIR /app
+EXPOSE 80
 
-# Copy csproj and restore as distinct layers
-COPY ./Customer.API/*.csproj ./
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS buildz
+WORKDIR /src
+COPY ["Customer.API/Customer.API.csproj", "Customer.API/"]
+COPY ["Service.Common/Service.Common.csproj", "Service.Common/"]
+RUN dotnet restore "Customer.API/Customer.API.csproj"
+COPY . .
+WORKDIR "/src/Customer.API"
+RUN dotnet build "Customer.API.csproj" -c Release -o /app
 
-# Copy everything else and build
-COPY ./Customer.API/. ./
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "Customer.API.csproj" -c Release -o /app
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=publish /app .
 ENV ASPNETCORE_URLS=http://+:60045
 ENTRYPOINT ["dotnet", "Customer.API.dll"]

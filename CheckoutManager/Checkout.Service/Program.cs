@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Serilog;
-using Serilog.Formatting.Compact;
+using Microsoft.Extensions.Hosting;
 using Service.Common.Events;
 using Service.Common.Serilog;
 using Service.Common.Services;
-using System;
 
 namespace Checkout.Service
 {
@@ -16,6 +14,7 @@ namespace Checkout.Service
             LoggerUtil.InitApp(ServiceHost.Create<Startup>(args).UseRabbitMq().SubscribeToEvent<PostedOrder>().Build().Run);
         }
 
-        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        public static IHostBuilder BuildWebHost(string[] args) =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webbuilder => { webbuilder.UseStartup<Startup>(); });
     }
 }

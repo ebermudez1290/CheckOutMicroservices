@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Service.Common.Serilog;
-using Service.Common.Services;
 
 namespace Gateway.API
 {
@@ -16,9 +9,17 @@ namespace Gateway.API
     {
         public static void Main(string[] args)
         {
-            LoggerUtil.InitApp(ServiceHost.Create<Startup>(args).Build().Run);
+            LoggerUtil.InitApp(CreateHostBuilder(args).Build().Run);
         }
 
-        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config
+                    .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile("ocelot.json")
+                    .AddEnvironmentVariables();
+            })
+            .ConfigureWebHostDefaults(webbuilder => { webbuilder.UseStartup<Startup>(); });
     }
 }

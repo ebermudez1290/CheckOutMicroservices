@@ -4,6 +4,7 @@ namespace Service.Common.Events
 {
     public class PostedOrder : IEvent
     {
+        public long Id { get; set; }
         public long OrderId { get; set; }
         public long CustomerId { get; set; }
         public decimal Total { get; set; }

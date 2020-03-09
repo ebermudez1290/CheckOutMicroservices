@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using RawRabbit;
 using Service.Common.Commands;
 using Service.Common.Events;
@@ -11,9 +11,9 @@ namespace Service.Common.Services
 {
     public class ServiceHost : IServiceHost
     {
-        private readonly IWebHost _webHost;
+        private readonly IHost _webHost;
 
-        public ServiceHost(IWebHost webHost)
+        public ServiceHost(IHost webHost)
         {
             this._webHost = webHost;
         }
@@ -25,10 +25,11 @@ namespace Service.Common.Services
             Console.Title = typeof(TStartup).Namespace;
             var config = new ConfigurationBuilder().AddEnvironmentVariables().AddCommandLine(args).Build();
 
-            var webHostBuilder = WebHost.CreateDefaultBuilder()
-                .UseConfiguration(config)
-                .UseStartup<TStartup>();
-            return new HostBuilder(webHostBuilder.Build());
+            var host = Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webbuilder =>
+            {
+                webbuilder.UseStartup<TStartup>();
+            }).Build();
+            return new HostBuilder(host);
         }
     }
 
@@ -39,10 +40,10 @@ namespace Service.Common.Services
 
     public class HostBuilder : BuilderBase
     {
-        private readonly IWebHost _webHost;
+        private readonly IHost _webHost;
         private IBusClient _bus;
 
-        public HostBuilder(IWebHost webHost) { this._webHost = webHost; }
+        public HostBuilder(IHost webHost) { this._webHost = webHost; }
 
         public BusBuilder UseRabbitMq()
         {
@@ -55,10 +56,10 @@ namespace Service.Common.Services
 
     public class BusBuilder : BuilderBase
     {
-        private readonly IWebHost _webHost;
+        private readonly IHost _webHost;
         private IBusClient _bus;
 
-        public BusBuilder(IWebHost webHost, IBusClient bus)
+        public BusBuilder(IHost webHost, IBusClient bus)
         {
             this._webHost = webHost;
             this._bus = bus;

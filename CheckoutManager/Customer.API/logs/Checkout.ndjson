@@ -35,3 +35,25 @@
 {"@t":"2020-03-05T20:47:20.7491362Z","@m":"Application start-up failed","@i":"f8803f6f","@l":"Fatal","@x":"System.IO.IOException: Failed to bind to address http://localhost:60045. ---> System.AggregateException: One or more errors occurred. (An attempt was made to access a socket in a way forbidden by its access permissions) (An attempt was made to access a socket in a way forbidden by its access permissions) ---> System.Net.Sockets.SocketException: An attempt was made to access a socket in a way forbidden by its access permissions\r\n   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)\r\n   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)\r\n   at System.Net.Sockets.Socket.Bind(EndPoint localEP)\r\n   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)\r\n   --- End of inner exception stack trace ---\r\n   --- End of inner exception stack trace ---\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)\r\n   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)\r\n   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)\r\n   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)\r\n   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)\r\n   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)\r\n   at Service.Common.Services.ServiceHost.Run() in D:\\Avantica\\GitLab\\C#\\Avantica Tutorial\\Checkout Microservice Example\\CheckoutManager\\Service.Common\\Services\\ServiceHost.cs:line 21\r\n   at Service.Common.Serilog.LoggerUtil.InitApp(Action function) in D:\\Avantica\\GitLab\\C#\\Avantica Tutorial\\Checkout Microservice Example\\CheckoutManager\\Service.Common\\Serilog\\LoggerUtil.cs:line 18"}
 {"@t":"2020-03-05T20:50:07.2458296Z","@m":"Starting up","@i":"a6ca7b02"}
 {"@t":"2020-03-05T20:53:01.3811084Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:21:02.9515440Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:22:55.0977089Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:24:55.8297064Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:42:28.9422435Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:48:51.3698170Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T21:53:14.6063605Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T22:04:35.3450142Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T22:44:03.6314880Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T22:46:05.3106354Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T22:48:43.9728856Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-05T22:50:31.5369141Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T13:30:19.1999851Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T20:26:45.7167149Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T20:29:50.8763809Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T20:30:23.1121720Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T20:30:41.3017427Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-06T22:22:55.0981099Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-09T19:58:15.1230219Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-09T20:01:00.8452164Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-09T20:19:26.9976041Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-09T20:22:19.3723106Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-09T20:23:31.9549951Z","@m":"Starting up","@i":"a6ca7b02"}

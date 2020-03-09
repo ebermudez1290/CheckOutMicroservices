@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Serilog;
-using Serilog.Formatting.Compact;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Service.Common.Serilog;
 using Service.Common.Services;
-using System;
 
 namespace Orders.API
 {
@@ -15,6 +12,7 @@ namespace Orders.API
             LoggerUtil.InitApp(ServiceHost.Create<Startup>(args).UseRabbitMq().Build().Run);
         }
 
-        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webbuilder => { webbuilder.UseStartup<Startup>(); });
     }
 }

@@ -6,24 +6,25 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Customers",
       "ServiceName": "CustomerApi",
+      "UseServiceDiscovery": true,
       "UpstreamHttpMethod": [ "Get" ],
-      "FileCacheOptions": { "TtlSeconds": 15 }
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "ApiSecurity",
-      //  "AllowedScopes": []
+      //"QoSOptions": {
+      //  "ExceptionsAllowedBeforeBreaking": 3,
+      //  "DurationOfBreak": 1000,
+      //  "TimeoutValue": 5000
       //},
-      //"RouteClaimsRequirement": {
-      //  "userType": "SALESMAN"
-      //}
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
     "AdministrationPath": "/administration",
-    "UseServiceDiscovery": true,
     "ServiceDiscoveryProvider": {
       "Type": "Eureka",
-      "Host": "172.23.10.209",
+      "Host": "192.168.25.158",
       "Port": "8761"
     }
   }

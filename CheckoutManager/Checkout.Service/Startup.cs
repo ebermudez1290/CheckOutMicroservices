@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Service.Common.Cors;
 using Service.Common.Events;
 using Service.Common.HC;
@@ -32,6 +33,7 @@ namespace Checkout.Service
             services.Configure<AppSettings>(appSettingsSection);
             AppSettings settings = appSettingsSection.Get<AppSettings>();
             string connectionString = Configuration.GetConnectionString("PaymentDB");
+
             services.AddCORSService(settings.AllowedAuthOrigins);
             services.AddDbContext<PaymentDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
             services.AddTransient<DbContext, PaymentDbContext>();
@@ -43,7 +45,7 @@ namespace Checkout.Service
             services.AddDBHealthCheck(new SqlConnectionHealthCheck( connectionString));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage(); else app.UseHsts();
             app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });

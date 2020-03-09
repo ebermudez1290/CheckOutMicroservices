@@ -1,8 +1,6 @@
-﻿using Audit.API.ServiceImpl;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Service.Common.Events;
-using Service.Common.Grpc;
 using Service.Common.Serilog;
 using Service.Common.Services;
 
@@ -19,6 +17,7 @@ namespace Audit.API
             //new GrpcServer("localhost", 50051, Auditservice.AuditService.BindService(new AuditServiceImpl())).InitServer();
         }
 
-        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webbuilder => { webbuilder.UseStartup<Startup>(); });
     }
 }

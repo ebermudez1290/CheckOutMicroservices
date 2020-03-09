@@ -21,12 +21,12 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:64333"
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Payments",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/hc",
       "environmentVariables": {},
       "httpPort": 64333
     }
