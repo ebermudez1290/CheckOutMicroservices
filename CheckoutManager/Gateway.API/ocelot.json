@@ -13,7 +13,7 @@
       //  "DurationOfBreak": 1000,
       //  "TimeoutValue": 5000
       //},
-      "FileCacheOptions": { "TtlSeconds": 15 },
+      "FileCacheOptions": { "TtlSeconds": 15 }
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
@@ -24,7 +24,7 @@
     "AdministrationPath": "/administration",
     "ServiceDiscoveryProvider": {
       "Type": "Eureka",
-      "Host": "192.168.25.158",
+      "Host": "172.30.12.183",
       "Port": "8761"
     }
   }

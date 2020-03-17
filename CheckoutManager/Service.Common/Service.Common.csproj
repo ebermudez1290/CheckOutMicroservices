@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Grpc.Core" Version="2.27.0" />
     <PackageReference Include="Marten.AspNetCore" Version="1.0.0" />
     <PackageReference Include="MediatR.Extensions" Version="0.6.0" />

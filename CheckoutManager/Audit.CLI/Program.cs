@@ -8,7 +8,7 @@ namespace Audit.CLI
     {
         static void Main(string[] args)
         {
-            Channel chanel = new Channel("localhost", 50051, ChannelCredentials.Insecure);
+            Channel chanel = new Channel("localhost", 61990, ChannelCredentials.Insecure);
             chanel.ConnectAsync().ContinueWith((task) =>
             {
                 if (task.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)

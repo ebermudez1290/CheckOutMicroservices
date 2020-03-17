@@ -1,4 +1,5 @@
-﻿using Customer.API.Configuration;
+﻿using AutoMapper;
+using Customer.API.Configuration;
 using Customer.API.Database;
 using Customer.API.Repository;
 using MediatR;
@@ -18,6 +19,7 @@ using Service.Common.ServiceDiscovery;
 using Steeltoe.Discovery.Client;
 using System.Reflection;
 using DbModels = Customer.API.Models;
+using Service.Common.AutoMapper;
 
 namespace Customer.API
 {
@@ -43,6 +45,7 @@ namespace Customer.API
             services.AddDBHealthCheck(new SqlConnectionHealthCheck(connectionString));
             services.AddServiceDiscovery(Configuration);
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapperSupport(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

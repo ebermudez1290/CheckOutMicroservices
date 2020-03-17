@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Service.Common.Repository;
 using System;
 using System.Threading;
@@ -10,15 +11,17 @@ namespace Customer.API.Command.Handlers
     public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, CreateCustomerResult>
     {
         private IRepository<DBModels.Customer> _customerRepository;
-        public CreateCustomerHandler(IRepository<DBModels.Customer> customerRepository)
+        private readonly IMapper _mapper;
+        public CreateCustomerHandler(IRepository<DBModels.Customer> customerRepository, IMapper mapper)
         {
             this._customerRepository = customerRepository;
+            this._mapper = mapper;
         }
-        public async Task<CreateCustomerResult> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CreateCustomerResult> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
         {
-            DBModels.Customer customer = new DBModels.Customer(request);
+            DBModels.Customer customer = _mapper.Map<CreateCustomerCommand,DBModels.Customer>(command);
             var result = await _customerRepository.CreateAsync(customer);
-            return new CreateCustomerResult(result);
+            return _mapper.Map<DBModels.Customer, CreateCustomerResult>(result);
         }
     }
 }
