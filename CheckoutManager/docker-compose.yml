@@ -3,34 +3,19 @@ version: '3.4'
 services:
   customer.api:
     image: ${DOCKER_REGISTRY-}customerapi
+    volumes:
+        - testvolume:C:/volume
     build:
-      context: .
-      dockerfile: Customer.API\Dockerfile
-
-  gateway.api:
-    image: ${DOCKER_REGISTRY-}gatewayapi
-    build:
-      context: .
-      dockerfile: Gateway.API\Dockerfile
+        context: .
+        dockerfile: Customer.API\Dockerfile
+    volumes:
+        - testvolume:C:/volume
+    networks:  
+        - esnetwork
 
 
-  orders.api:
-    image: ${DOCKER_REGISTRY-}ordersapi
-    build:
-      context: .
-      dockerfile: Orders.API\Dockerfile
-
-
-  checkout.service:
-    image: ${DOCKER_REGISTRY-}checkoutservice
-    build:
-      context: .
-      dockerfile: Checkout.Service\Dockerfile
-
-
-  audit.api:
-    image: ${DOCKER_REGISTRY-}auditapi
-    build:
-      context: .
-      dockerfile: Audit.API\Dockerfile
-
+networks:
+    esnetwork:
+        driver: nat
+volumes:
+    testvolume:

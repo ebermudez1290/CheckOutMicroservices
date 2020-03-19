@@ -19,6 +19,8 @@ using Service.Common.Jwt;
 using Service.Common.RabbitMq.Extensions;
 using Service.Common.Repository;
 using Service.Common.Repository.Database;
+using Service.Common.ServiceDiscovery;
+using Steeltoe.Discovery.Client;
 
 namespace Orders.API
 {
@@ -44,14 +46,15 @@ namespace Orders.API
             services.AddScoped<IDatabase<Order>, EntityFrameworkDatabase<Order>>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             //Marten add
-            services.AddMartenEventSourcing(Configuration.GetConnectionString("EventSource"));
-            services.AddScoped<IEventSourcingDb<PostedOrder>, MartenEventSource<PostedOrder>>();
+            //services.AddMartenEventSourcing(Configuration.GetConnectionString("EventSource"));
+            //services.AddScoped<IEventSourcingDb<PostedOrder>, MartenEventSource<PostedOrder>>();
             //JWT
             services.AddJWTAuthentication(settings.Secret);
             //RabbitMQ
             services.AddRabbitMq(Configuration.GetSection("rabbitmq"));
             //HC
             services.AddDBHealthCheck(new SqlConnectionHealthCheck(connectionString));
+            services.AddServiceDiscovery(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,6 +63,7 @@ namespace Orders.API
             app.UseRouting();
             app.UseHealthChecks("/hc", new HealthCheckOptions() { Predicate = _ => true, });
             app.UseCors("CorsPolicy");
+            app.UseDiscoveryClient();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 

@@ -1,11 +1,27 @@
 {
   "ReRoutes": [
     {
-
       "DownstreamPathTemplate": "/api/customers",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Customers",
       "ServiceName": "CustomerApi",
+      "UseServiceDiscovery": true,
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      },
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/orders",
+      "ServiceName": "OrderApi",
       "UseServiceDiscovery": true,
       "UpstreamHttpMethod": [ "Get" ],
       "QoSOptions": {
@@ -24,7 +40,7 @@
     "AdministrationPath": "/administration",
     "ServiceDiscoveryProvider": {
       "Type": "Eureka",
-      "Host": "172.23.167.232",
+      "Host": "172.27.60.135",
       "Port": "8761"
     }
   }

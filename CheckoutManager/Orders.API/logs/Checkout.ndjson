@@ -44,3 +44,6 @@
 {"@t":"2020-03-09T17:44:28.4889825Z","@m":"Sequence 1 added to dictionary","@i":"ef140498","sequence":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
 {"@t":"2020-03-09T17:44:28.4934258Z","@m":"Performing basic publish with routing key \"postedorder\" on exchange \"service.common.events\".","@i":"475a66e6","routingKey":"postedorder","exchangeName":"service.common.events","SourceContext":"RawRabbit.Pipe.Middleware.BasicPublishMiddleware"}
 {"@t":"2020-03-09T17:44:28.5210518Z","@m":"Recieived ack for 1","@i":"18ddbbf3","deliveryTag":1,"SourceContext":"RawRabbit.Operations.Publish.Middleware.PublishAcknowledgeMiddleware"}
+{"@t":"2020-03-19T18:37:51.0740048Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-19T18:53:10.3783776Z","@m":"Starting up","@i":"a6ca7b02"}
+{"@t":"2020-03-19T18:55:19.5385589Z","@m":"Starting up","@i":"a6ca7b02"}

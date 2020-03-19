@@ -19,12 +19,13 @@ namespace Orders.API.Controllers
     {
         private IRepository<Order> _orderRepository;
         private readonly IBusClient _busClient;
-        private IEventSourcingDb<PostedOrder> _eventStore;
-        public OrdersController(IRepository<Order> orderRepository, IBusClient busClient, IEventSourcingDb<PostedOrder> eventStore)
+        //private IEventSourcingDb<PostedOrder> _eventStore;
+        public OrdersController(IRepository<Order> orderRepository, IBusClient busClient)
+            //, IEventSourcingDb<PostedOrder> eventStore)
         {
             this._busClient = busClient;
             _orderRepository = orderRepository;
-            _eventStore = eventStore;
+            //_eventStore = eventStore;
         }
 
         #region Queries
@@ -55,7 +56,7 @@ namespace Orders.API.Controllers
                 Total = order.Total,
                 Status = ServiceEnums.OrderStatus.Pending.ToString(),
             };
-            _eventStore.Create(command);
+            //_eventStore.Create(command);
             await this._busClient.PublishAsync(command);
             return Ok(order);
         }

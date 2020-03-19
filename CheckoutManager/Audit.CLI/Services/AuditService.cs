@@ -15,7 +15,7 @@ namespace Audit.CLI.Services
             try
             {
                 var client = new Auditservice.AuditService.AuditServiceClient(channel);
-                var result = client.ReadAll(new ReadAllAuditRequest(),) ;
+                var result = client.ReadAll(new ReadAllAuditRequest()) ;
                 List<AuditEntry> entries = new List<AuditEntry>();
                 while (await result.ResponseStream.MoveNext())
                     entries.Add(result.ResponseStream.Current.AuditResponse);
