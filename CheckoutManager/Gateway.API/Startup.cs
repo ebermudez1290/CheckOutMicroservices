@@ -8,6 +8,7 @@ using Ocelot.Middleware;
 using Service.Common.Cors;
 using Service.Common.Ocelot;
 
+
 namespace Gateway.API
 {
     public class Startup
@@ -25,6 +26,7 @@ namespace Gateway.API
             AppSettings settings = appSettingsSection.Get<AppSettings>();
             services.AddCORSService(settings.AllowedAuthOrigins);
             services.AddOcelotWithEureka();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

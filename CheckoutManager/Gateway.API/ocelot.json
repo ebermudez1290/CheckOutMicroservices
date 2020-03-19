@@ -8,12 +8,12 @@
       "ServiceName": "CustomerApi",
       "UseServiceDiscovery": true,
       "UpstreamHttpMethod": [ "Get" ],
-      //"QoSOptions": {
-      //  "ExceptionsAllowedBeforeBreaking": 3,
-      //  "DurationOfBreak": 1000,
-      //  "TimeoutValue": 5000
-      //},
-      "FileCacheOptions": { "TtlSeconds": 15 }
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      },
+      "FileCacheOptions": { "TtlSeconds": 15 },
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
@@ -24,7 +24,7 @@
     "AdministrationPath": "/administration",
     "ServiceDiscoveryProvider": {
       "Type": "Eureka",
-      "Host": "172.30.12.183",
+      "Host": "172.23.167.232",
       "Port": "8761"
     }
   }
